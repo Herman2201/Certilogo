@@ -1,10 +1,22 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import anime from 'animejs/lib/anime.es.js';
+import '../style/App.css'
 function Animations() {
   const screenWidth = window.screen.width;
   const screenHeight = window.screen.height;
   const [isComplete, setComplete] = useState(false);
   const [isEnd, setEnd] = useState(false);
+  const playerRef = useRef();
+  let playVideo = (event) => {
+    if (playerRef.current) {
+       playerRef.current.play()
+    }
+ }
+
+ if(isComplete) {
+  playVideo();
+ }
+
   const widthCircle = [
     [4, 4],
     [8, 8],
@@ -198,7 +210,7 @@ function Animations() {
   return (
     <div className="h-screen min-h-full relative justify-center overflow-hidden bg-white">
       <div className="justify-center m-auto pt-[10px]">
-        {isComplete ? <video className='absolute top-0 w-full h-screen text-center object-contain' src='/fon.mp4' type="video/mp4" autoPlay muted></video> : ''}
+        {isComplete ? <video className='absolute top-0 w-full h-screen text-center object-contain' ref={playerRef} src='/fon.mp4' type="video/mp4" autoPlay muted playsInline></video> : ''}
         <img className="m-auto relative" src="/stone-logo-white.svg" alt="" />
         <p
           className="m-auto z-10"
