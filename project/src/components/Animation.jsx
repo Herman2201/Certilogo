@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import anime from 'animejs/lib/anime.es.js';
-import '../style/App.css'
+import '../style/App.css';
 function Animations() {
   const screenWidth = window.screen.width;
   const screenHeight = window.screen.height;
@@ -9,13 +9,26 @@ function Animations() {
   const playerRef = useRef();
   let playVideo = (event) => {
     if (playerRef.current) {
-       playerRef.current.play()
+      playerRef.current.play();
     }
- }
+  };
+  // if (isComplete) {
+  //   const videoElement = document.getElementById('home_video');
+  //   console.log(videoElement);
+  //   if (videoElement) {
+  //     if (videoElement.playing) {
+  //       // video is already playing so do nothing
+  //     } else {
+  //       // video is not playing
+  //       // so play video now
+  //       videoElement.play();
+  //     }
+  //   }
+  // }
 
- if(isComplete) {
-  playVideo();
- }
+  if (isComplete) {
+    playVideo();
+  }
 
   const widthCircle = [
     [4, 4],
@@ -210,7 +223,21 @@ function Animations() {
   return (
     <div className="h-screen min-h-full relative justify-center overflow-hidden bg-white">
       <div className="justify-center m-auto pt-[10px]">
-        {isComplete ? <video className='absolute top-0 w-full h-screen text-center object-contain' ref={playerRef} src='/fon.mp4' type="video/mp4" autoPlay muted playsInline></video> : ''}
+        {isComplete ? (
+          <video
+            id="home_video"
+            className="absolute top-0 w-full text-center object-contain"
+            muted
+            playsInline
+            autoplay="autoplay"
+            width={100}
+            height={100}
+          >
+            <source src="/fon.mp4" type="video/mp4" />
+          </video>
+        ) : (
+          ''
+        )}
         <img className="m-auto relative" src="/stone-logo-white.svg" alt="" />
         <p
           className="m-auto z-10"
